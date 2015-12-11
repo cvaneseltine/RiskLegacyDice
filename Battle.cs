@@ -15,7 +15,10 @@ namespace RiskLegacyDice {
 
 		public void Fight () {
 			string response;
-			int attackCount, defendCount, troopCount, attackTroop, defendTroop;
+			int attackCount = 0;
+			int defendCount = 0;
+			int troopCount = 0;
+			int attackTroop, defendTroop;
 			List <Dice> attackDice = new List<Dice> ();
 			List <Dice> defendDice = new List<Dice> ();
 			bool showBattles = true;
@@ -27,16 +30,21 @@ namespace RiskLegacyDice {
 
 				Console.Write ("How many black dice is the attacker using?> ");
 				response = Console.ReadLine ();
-				parsed = Int32.TryParse (response, out attackCount);
-				if (!parsed) {
+				if (response == null) {
 					Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
 				}
 				else {
-					if (attackCount <= 0) {
-						Console.WriteLine ("You can't attack with " + attackCount + " dice!");
+					parsed = Int32.TryParse (response, out attackCount);
+					if (!parsed) {
+						Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
 					}
-					else if (attackCount > 3) {
-						Console.WriteLine ("That attacker is cheating, but okay.");
+					else {
+						if (attackCount <= 0) {
+							Console.WriteLine ("You can't attack with " + attackCount + " dice!");
+						}
+						else if (attackCount > 3) {
+							Console.WriteLine ("That attacker is cheating, but okay.");
+						}
 					}
 				}
 			} while (attackCount <= 0);
@@ -45,16 +53,21 @@ namespace RiskLegacyDice {
 
 				Console.Write ("How many red dice is the defender using?> ");
 				response = Console.ReadLine ();
-				parsed = Int32.TryParse (response, out defendCount);
-				if (!parsed) {
+				if (response == null) {
 					Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
 				}
 				else {
-					if (defendCount <= 0) {
-						Console.WriteLine ("You can't defend with " + defendCount + " dice!");
+					parsed = Int32.TryParse (response, out defendCount);
+					if (!parsed) {
+						Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
 					}
-					else if (defendCount > 2) {
-						Console.WriteLine ("That defender is cheating, but okay.");
+					else {
+						if (defendCount <= 0) {
+							Console.WriteLine ("You can't defend with " + defendCount + " dice!");
+						}
+						else if (defendCount > 2) {
+							Console.WriteLine ("That defender is cheating, but okay.");
+						}
 					}
 				}
 			} while (defendCount <= 0);
@@ -64,13 +77,18 @@ namespace RiskLegacyDice {
 
 				Console.Write ("How many troops are they starting with (apiece)?> ");
 				response = Console.ReadLine ();
-				parsed = Int32.TryParse (response, out troopCount);
-				if (!parsed) {
+				if (response == null) {
 					Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
 				}
 				else {
-					if (troopCount <= 0) {
-						Console.WriteLine ("They have " + troopCount + " troops? C'mon, be sensible.");
+					parsed = Int32.TryParse (response, out troopCount);
+					if (!parsed) {
+						Console.WriteLine ("Couldn't understand that. Try a number, like 2.");
+					}
+					else {
+						if (troopCount <= 0) {
+							Console.WriteLine ("They have " + troopCount + " troops? C'mon, be sensible.");
+						}
 					}
 				}
 			} while (troopCount <= 0);
@@ -78,7 +96,7 @@ namespace RiskLegacyDice {
 			Console.Write ("Is there a bunker? (y for yes)> ");
 			response = Console.ReadLine();
 			response = response.ToLower();
-			if ((response.Length > 0) && (response[0] == 'y')) {
+			if ((response != null) && ((response.Length > 0) && (response[0] == 'y'))) {
 				isBunker = true;
 				Console.WriteLine ("Bunker, got it.\n");
 			}
@@ -86,7 +104,7 @@ namespace RiskLegacyDice {
 				Console.Write ("Is there an ammo shortage? (y for yes)> ");
 				response = Console.ReadLine();
 				response = response.ToLower();
-				if ((response.Length > 0) && (response[0] == 'y')) {
+				if ((response != null) && ((response.Length > 0) && (response[0] == 'y'))) {
 					isAmmoShortage = true;
 					Console.WriteLine ("Ammo shortage, got it.\n");
 				}

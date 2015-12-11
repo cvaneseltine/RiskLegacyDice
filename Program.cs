@@ -18,7 +18,7 @@ namespace RiskLegacyDice {
 
 				Console.Write ("Run another battle? (y to continue, anything else to quit)> ");
 				response = Console.ReadLine();
-				if (response.Length > 0) {
+				if ((response != null) && (response.Length > 0)) {
 					if (response[0] == 'y') {
 						Console.WriteLine ("Onward then!\n\n");
 					}
